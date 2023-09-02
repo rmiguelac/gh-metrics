@@ -1,0 +1,26 @@
+name: gather-github-metrics
+author: rmiguelac
+description: Interact with GitHub REST API to collect workflow metrics 
+inputs:
+  # We might have a way to get this through introspection
+  organization:
+    description: "The organization that host the repository"
+    required: true
+    default: "rmiguelac"
+  repository:
+    description: "The repository where the workflow runs are"
+    required: true
+outputs:
+  report-path:
+    description: "The absolute path to the generated report"
+runs:
+  using: "composite"
+  steps:
+    - id: build
+      run: go build
+      shell: bash
+      workfing-directory: ${{ github.action_path }}
+
+    - id: gather-metrics
+      run: ./main --organization ${inputs.organization} --repository ${inputs.repository}
+      shell: bash
