@@ -15,7 +15,7 @@ Get metrics from github workflow runs
 ## Example Output
 
 <p align='center'.>
-  <img src="./static/metrics.html" width=25% height=25%>
+  <img src="./static/metrics.png" width=50% height=50%>
 </p>
 
 
