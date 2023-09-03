@@ -32,11 +32,11 @@ func GetFailures(r *workflows.MyWorkflowRuns) *Metrics {
 	total_w_failures := 0
 	total_w := 0
 	for _, w := range r.Workflows {
-		if w.Status == "failed" {
+		if w.Status == "failure" {
 			total_w_failures += 1
 		}
 		for _, j := range w.MyJobs {
-			if j.Status == "failed" {
+			if j.Status == "failure" {
 				total_job_failures += 1
 			}
 			total_jobs += 1

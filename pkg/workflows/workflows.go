@@ -53,7 +53,7 @@ func GetMyWorkflows() (*MyWorkflowRuns, error) {
 	 */
 	for _, w := range workflowRuns.WorkflowRuns {
 		myw := MyWorkflowRun{
-			Status: *w.Status,
+			Status: *w.Conclusion,
 		}
 
 		log.Printf("The workflowRun ID is: %d", w.ID)
@@ -69,6 +69,7 @@ func GetMyWorkflows() (*MyWorkflowRuns, error) {
 				QueuedTime: j.StartedAt.Sub(j.CreatedAt.Time),
 				Duration:   j.CompletedAt.Sub(j.StartedAt.Time),
 				Steps:      j.Steps,
+				Status:     *j.Conclusion,
 			}
 			log.Printf("The job id is: %d - Created at: %v - Started at: %v - Queue time: %v", *j.ID, *j.CreatedAt, *j.StartedAt, myj.QueuedTime)
 			myw.MyJobs = append(myw.MyJobs, myj)
