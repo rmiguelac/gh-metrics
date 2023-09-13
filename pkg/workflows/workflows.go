@@ -41,7 +41,10 @@ func GetMyWorkflows() (*MyWorkflowRuns, error) {
 	tc := oauth2.NewClient(ctx, ts)
 	client := github.NewClient(tc)
 
-	workflowRuns, _, err := client.Actions.ListRepositoryWorkflowRuns(ctx, os.Getenv("GH_ORGANIZATION"), os.Getenv("GH_REPOSITORY"), nil)
+	opts := github.ListWorkflowRunsOptions{
+		Created: "2019-01-18T17:35:34+09:00..2019-02-18T17:35:34+09:00",
+	}
+	workflowRuns, _, err := client.Actions.ListRepositoryWorkflowRuns(ctx, os.Getenv("GH_ORGANIZATION"), os.Getenv("GH_REPOSITORY"), &opts)
 	if err != nil {
 		log.Fatal(err)
 		return nil, err

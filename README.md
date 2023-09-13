@@ -35,6 +35,7 @@ A `metrics.html` shouuld've been created in the same folder where the code is.
 
 ## TODO
 
-[] Support Pagination  
-[] Support Query Workflows betwwen dates  
-[] Show values in pie charts  
+[TODO] Support Pagination  
+[DOING] Support Query Workflows between dates  
+[TODO] Show values in pie charts  
+[TODO] Add configuration file
