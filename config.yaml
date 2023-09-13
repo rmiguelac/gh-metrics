@@ -1,0 +1,5 @@
+# The repository to gather actions metrics from
+repository: "gh-metrics"
+
+# The organization that has given repository
+organization: "rmiguelac"
