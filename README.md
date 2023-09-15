@@ -3,15 +3,18 @@ Get metrics from github workflow runs
 
 ## Using
 
-### Setup relevant environment variables
+### Setup relevant parameters
 
-The following environment variables must be available:
+`organization` and `repository` parameters can be configured as in [config.yaml](config.yaml) or
+through the `GH_ORGANIZATION` and `GH_REPOSITORY` environment variables.  
+
+### Environment variables
 
 | Environment Variable | Default | Required | Example    | Description |
 | -------------------- | ------- | -------- | ---------- | ----------- |
-| GH_ORGANIZATION      | ''      | true     | rmiguelac  | The owner/org of the repo to be analyzed |
-| GH_REPOSITORY        | ''      | true     | gh-metrics | The repo to be analyzed |
-| GH_API_TOKEN         | ''      | true     | GH-PAT     | The Personal Access Token |
+| GH_ORGANIZATION      | ''      | no     | rmiguelac  | The owner/org of the repo to be analyzed |
+| GH_REPOSITORY        | ''      | no     | gh-metrics | The repo to be analyzed |
+| GH_API_TOKEN         | ''      | true   | GH-PAT     | The Personal Access Token |
 
 To have them, simply do:
 
