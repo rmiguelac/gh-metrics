@@ -23,16 +23,28 @@ func New() *Configuration {
 	}
 
 	var c Configuration
-	viper.SetDefault(c.Organization, os.Getenv("GH_ORGANIZATION"))
-	viper.SetDefault(c.Repository, os.Getenv("GH_REPOSITORY"))
 	err := viper.Unmarshal(&c)
 	if err != nil {
 		log.Fatalf("Unable to decode into struct, %v", err)
 	}
 
-	log.Fatalf("Reading variables...")
-	log.Fatalf("Organization is %s", c.Organization)
-	log.Fatalf("Repository is %s", c.Repository)
+	if c.Organization == "" {
+		if os.Getenv("GH_ORGANIZATION") == "" {
+			log.Fatal("Unable to get oganization parameter")
+		}
+		c.Organization = os.Getenv("GH_ORGANIZATION")
+	}
+
+	if c.Repository == "" {
+		if os.Getenv("GH_REPOSITORY") == "" {
+			log.Fatal("Unable to get repository parameter")
+		}
+		c.Repository = os.Getenv("GH_REPOSITORY")
+	}
+
+	log.Println("Reading variables...")
+	log.Printf("Organization is %s", c.Organization)
+	log.Printf("Repository is %s", c.Repository)
 
 	return &c
 }

@@ -62,7 +62,7 @@ func GetMyWorkflows(c *configuration.Configuration) (*MyWorkflowRuns, error) {
 
 		log.Printf("The workflowRun ID is: %d", w.ID)
 		rid := *w.ID
-		jobs, _, err := client.Actions.ListWorkflowJobs(ctx, os.Getenv("GH_ORGANIZATION"), os.Getenv("GH_REPOSITORY"), rid, nil)
+		jobs, _, err := client.Actions.ListWorkflowJobs(ctx, c.Organization, c.Repository, rid, nil)
 		if err != nil {
 			log.Fatal(err)
 			return nil, err
