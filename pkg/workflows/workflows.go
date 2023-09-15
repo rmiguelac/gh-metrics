@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/google/go-github/v54/github"
+	"github.com/rmiguelac/gh-metrics/pkg/configuration"
 	"golang.org/x/oauth2"
 )
 
@@ -34,7 +35,7 @@ type MyJobs struct {
 	Jobs  []MyJob
 }
 
-func GetMyWorkflows() (*MyWorkflowRuns, error) {
+func GetMyWorkflows(c *configuration.Configuration) (*MyWorkflowRuns, error) {
 	/* Do the Auth with oauth2 as recommended */
 	ctx := context.Background()
 	ts := oauth2.StaticTokenSource(&oauth2.Token{AccessToken: os.Getenv("GH_API_TOKEN")})
@@ -44,7 +45,7 @@ func GetMyWorkflows() (*MyWorkflowRuns, error) {
 	opts := github.ListWorkflowRunsOptions{
 		Created: "2023-09-12..2023-09-13",
 	}
-	workflowRuns, _, err := client.Actions.ListRepositoryWorkflowRuns(ctx, os.Getenv("GH_ORGANIZATION"), os.Getenv("GH_REPOSITORY"), &opts)
+	workflowRuns, _, err := client.Actions.ListRepositoryWorkflowRuns(ctx, c.Organization, c.Repository, &opts)
 	if err != nil {
 		log.Fatal(err)
 		return nil, err
@@ -61,7 +62,7 @@ func GetMyWorkflows() (*MyWorkflowRuns, error) {
 
 		log.Printf("The workflowRun ID is: %d", w.ID)
 		rid := *w.ID
-		jobs, _, err := client.Actions.ListWorkflowJobs(ctx, os.Getenv("GH_ORGANIZATION"), os.Getenv("GH_REPOSITORY"), rid, nil)
+		jobs, _, err := client.Actions.ListWorkflowJobs(ctx, c.Organization, c.Repository, rid, nil)
 		if err != nil {
 			log.Fatal(err)
 			return nil, err
