@@ -38,7 +38,6 @@ A `metrics.html` shouuld've been created in the same folder where the code is.
 
 ## TODO
 
-[] Support Pagination  
 [.] Support Query Workflows between dates  
 [] Show values in pie charts  
 [] Add proper logging  
