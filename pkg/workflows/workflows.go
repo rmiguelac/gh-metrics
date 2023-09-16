@@ -42,45 +42,64 @@ func GetMyWorkflows(c *configuration.Configuration) (*MyWorkflowRuns, error) {
 	tc := oauth2.NewClient(ctx, ts)
 	client := github.NewClient(tc)
 
-	opts := github.ListWorkflowRunsOptions{
-		Created: "2023-09-12..2023-09-13",
-	}
-	workflowRuns, _, err := client.Actions.ListRepositoryWorkflowRuns(ctx, c.Organization, c.Repository, &opts)
-	if err != nil {
-		log.Fatal(err)
-		return nil, err
+	w_opts := github.ListWorkflowRunsOptions{
+		Created:     "2023-09-01..2023-09-16",
+		ListOptions: github.ListOptions{PerPage: 10},
 	}
 
 	r := MyWorkflowRuns{}
 
-	/* For every workflow, get it to a struct and get its jobs details
-	 */
-	for _, w := range workflowRuns.WorkflowRuns {
-		myw := MyWorkflowRun{
-			Status: *w.Conclusion,
-		}
-
-		log.Printf("The workflowRun ID is: %d", w.ID)
-		rid := *w.ID
-		jobs, _, err := client.Actions.ListWorkflowJobs(ctx, c.Organization, c.Repository, rid, nil)
+	for {
+		/* List all workflow runs */
+		workflowRuns, resp, err := client.Actions.ListRepositoryWorkflowRuns(ctx, c.Organization, c.Repository, &w_opts)
 		if err != nil {
 			log.Fatal(err)
 			return nil, err
 		}
-
-		for _, j := range jobs.Jobs {
-			myj := MyJob{
-				QueuedTime: j.StartedAt.Sub(j.CreatedAt.Time),
-				Duration:   j.CompletedAt.Sub(j.StartedAt.Time),
-				Steps:      j.Steps,
-				Status:     *j.Conclusion,
+		for _, w := range workflowRuns.WorkflowRuns {
+			myw := MyWorkflowRun{
+				Status: *w.Conclusion,
 			}
-			log.Printf("The job id is: %d - Created at: %v - Started at: %v - Queue time: %v", *j.ID, *j.CreatedAt, *j.StartedAt, myj.QueuedTime)
-			myw.MyJobs = append(myw.MyJobs, myj)
+
+			log.Printf("The workflowRun ID is: %d", w.ID)
+			rid := *w.ID
+
+			/* Get all jobs from current workflow */
+			j_opts := github.ListWorkflowJobsOptions{
+				ListOptions: github.ListOptions{PerPage: 10},
+			}
+			for {
+				jobs, jresp, err := client.Actions.ListWorkflowJobs(ctx, c.Organization, c.Repository, rid, &j_opts)
+				if err != nil {
+					log.Fatal(err)
+					return nil, err
+				}
+
+				for _, j := range jobs.Jobs {
+					myj := MyJob{
+						QueuedTime: j.StartedAt.Sub(j.CreatedAt.Time),
+						Duration:   j.CompletedAt.Sub(j.StartedAt.Time),
+						Steps:      j.Steps,
+						Status:     *j.Conclusion,
+					}
+					log.Printf("The job id is: %d - Created at: %v - Started at: %v - Queue time: %v", *j.ID, *j.CreatedAt, *j.StartedAt, myj.QueuedTime)
+					myw.MyJobs = append(myw.MyJobs, myj)
+				}
+
+				r.Workflows = append(r.Workflows, myw)
+				r.Count += 1
+				if jresp.NextPage == 0 {
+					break
+				}
+				j_opts.Page = jresp.NextPage
+
+			}
 		}
 
-		r.Workflows = append(r.Workflows, myw)
-		r.Count += 1
+		if resp.NextPage == 0 {
+			break
+		}
+		w_opts.Page = resp.NextPage
 	}
 
 	return &r, nil
