@@ -58,3 +58,6 @@ A `metrics.html` should've been created in the same folder where the code is.
 
 [] Add metrics to influxdb  
 [] Add CLI support  
+[] Add tests
+[] Update the action
+[] Update the pipeline
