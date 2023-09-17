@@ -3,3 +3,9 @@ repository: "gh-metrics"
 
 # The organization that has given repository
 organization: "rmiguelac"
+
+report:
+  colors:
+    # RGBA
+    failure: "255, 61, 71, 0.7"
+    success: "139, 193, 71, 0.7"

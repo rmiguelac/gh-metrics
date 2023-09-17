@@ -17,6 +17,6 @@ func main() {
 	}
 
 	m := metrics.GetMetrics(myw)
-	metrics.RenderMetricsHTML(m)
+	metrics.RenderMetricsHTML(m, c)
 
 }
