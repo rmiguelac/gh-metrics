@@ -57,11 +57,19 @@ func New() *Configuration {
 		c.Organization = os.Getenv("GH_ORGANIZATION")
 	}
 
+	if os.Getenv("GH_ORGANIZATION") != "" {
+		c.Organization = os.Getenv("GH_ORGANIZATION")
+	}
+
 	if c.Repository == "" {
 		if os.Getenv("GH_REPOSITORY") == "" {
 			log.Fatal("Unable to get repository parameter")
 		}
 		c.Repository = os.Getenv("GH_REPOSITORY")
+	}
+
+	if os.Getenv("GH_REPOSITORY") != "" {
+		c.Organization = os.Getenv("GH_REPOSITORY")
 	}
 
 	log.Println("Reading configuration file...")
