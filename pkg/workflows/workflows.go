@@ -8,6 +8,7 @@ import (
 
 	"github.com/google/go-github/v54/github"
 	"github.com/rmiguelac/gh-metrics/pkg/configuration"
+	"github.com/rmiguelac/gh-metrics/pkg/utils"
 	"golang.org/x/oauth2"
 )
 
@@ -42,8 +43,13 @@ func GetMyWorkflows(c *configuration.Configuration) (*MyWorkflowRuns, error) {
 	tc := oauth2.NewClient(ctx, ts)
 	client := github.NewClient(tc)
 
+	trange, err := utils.GetTimeRange(c)
+	if err != nil {
+		log.Printf("Unable to get expected time range")
+	}
+
 	w_opts := github.ListWorkflowRunsOptions{
-		Created:     "2023-09-01..2023-09-16",
+		Created:     trange,
 		ListOptions: github.ListOptions{PerPage: 10},
 	}
 
