@@ -39,8 +39,6 @@ A `metrics.html` shouuld've been created in the same folder where the code is.
 ## TODO
 
 [.] Support Query Workflows between dates  
-[] Show values in pie charts  
 [] Add proper logging  
 [] Add metrics to influxdb  
-[] Fix color scheme for reports  
 [] Add CLI support  
