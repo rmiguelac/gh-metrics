@@ -10,6 +10,16 @@ import (
 type Configuration struct {
 	Organization string
 	Repository   string
+	Report       *Report
+}
+
+type Report struct {
+	Colors *Colors
+}
+
+type Colors struct {
+	Failure string
+	Success string
 }
 
 func New() *Configuration {
@@ -45,6 +55,7 @@ func New() *Configuration {
 	log.Println("Reading variables...")
 	log.Printf("Organization is %s", c.Organization)
 	log.Printf("Repository is %s", c.Repository)
+	log.Printf("Report is %s", c.Report.Colors.Success)
 
 	return &c
 }
