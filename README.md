@@ -11,9 +11,9 @@ Parameters that can be configured in [config.yaml](config.yaml)
 | --------- | ------- | -------- | ------- | ----------- |
 | organization | ''   | yes      | rmiguelac | The owner/org of the repo to be analyzed | 
 | repository | ''     | yes      | gh-metrics | The repo to be analyzed |
-| report.data.last | `days: 7` | no | `report.data.last.weeks: 2` | Number of `hours`, `days`, `weeks` or `months` to look for workflows. Just one option at the time |
-| report.data.colors.failure | `report.colors.failure: "255, 61, 71, 0.7"` | no | `report.colors.failure: "255, 61, 71, 0.7"` | Color to be used for data points that represent failures. RGBA format |
-| report.data.colors.success | `report.colors.success: "139, 193, 71, 0.7"` | no | `report.colors.success: "139, 193, 71, 0.7"` | Color to be used for data points that represent successs. RGBA format |
+| report.data.last | `days: 7` | no | `weeks: 2` | Number of `hours`, `days`, `weeks` or `months` to look for workflows. Just one option at the time |
+| report.data.colors.failure | "255, 61, 71, 0.7" | no | "255, 61, 71, 0.7" | Color to be used for data points that represent failures. RGBA format |
+| report.data.colors.success | "139, 193, 71, 0.7" | no | "139, 193, 71, 0.7" | Color to be used for data points that represent successs. RGBA format |
 
 #### On Environment Variables and File Parameters
 
