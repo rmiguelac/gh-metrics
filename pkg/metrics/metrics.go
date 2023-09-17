@@ -54,13 +54,6 @@ func GetFailures(r *workflows.MyWorkflowRuns) *Metrics {
 func GetQueueTimes() {}
 
 /*
-	Should gite insights regarding runners capacity and whether we should
-
-increase its count
-*/
-func GetAverageQueueTime() {}
-
-/*
 	Should give insights on what steps could be improved regarding
 
 times - either by runner resources or something else
@@ -69,8 +62,3 @@ func GetLongestJobStep() {}
 
 /* Get how long jobs are running */
 func GetDurations() {}
-
-/*
-Should give insight on how much time it takes to get a feedback from a change
-*/
-func GetAverageDutarion() {}

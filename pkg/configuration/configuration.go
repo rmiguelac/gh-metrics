@@ -40,6 +40,10 @@ func New() *Configuration {
 	viper.AutomaticEnv()
 	viper.SetConfigType("yaml")
 
+	viper.SetDefault("report.data.last.days", 7)
+	viper.SetDefault("report.colors.success", "139, 193, 71, 0.7")
+	viper.SetDefault("report.colors.failure", "255, 61, 71, 0.7")
+
 	if err := viper.ReadInConfig(); err != nil {
 		log.Fatalf("Error reading config file, %s", err)
 	}
