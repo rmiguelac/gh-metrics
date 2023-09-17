@@ -27,7 +27,7 @@ Simply run it with `go run main.go` or build it with `go build .` then run it `.
 
 ### Output
 
-A `metrics.html` shouuld've been created in the same folder where the code is.
+A `metrics.html` should've been created in the same folder where the code is.
 
 ## Example Output
 
@@ -39,6 +39,5 @@ A `metrics.html` shouuld've been created in the same folder where the code is.
 ## TODO
 
 [.] Support Query Workflows between dates  
-[] Add proper logging  
 [] Add metrics to influxdb  
 [] Add CLI support  

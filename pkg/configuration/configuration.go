@@ -52,10 +52,9 @@ func New() *Configuration {
 		c.Repository = os.Getenv("GH_REPOSITORY")
 	}
 
-	log.Println("Reading variables...")
+	log.Println("Reading configuration file...")
 	log.Printf("Organization is %s", c.Organization)
 	log.Printf("Repository is %s", c.Repository)
-	log.Printf("Report is %s", c.Report.Colors.Success)
 
 	return &c
 }
