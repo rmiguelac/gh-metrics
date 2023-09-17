@@ -7,6 +7,8 @@ Get metrics from github workflow runs
 
 `organization` and `repository` parameters can be configured as in [config.yaml](config.yaml) or
 through the `GH_ORGANIZATION` and `GH_REPOSITORY` environment variables.  
+The values `report.data.last` allow customizing how far back the queries should go.  
+For 5 days, use `report.data.last.days: 5`, for example.
 
 ### Environment variables
 
@@ -38,6 +40,5 @@ A `metrics.html` should've been created in the same folder where the code is.
 
 ## TODO
 
-[.] Support Query Workflows between dates  
 [] Add metrics to influxdb  
 [] Add CLI support  

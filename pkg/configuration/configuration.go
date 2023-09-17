@@ -15,11 +15,23 @@ type Configuration struct {
 
 type Report struct {
 	Colors *Colors
+	Data   *Data
 }
 
 type Colors struct {
 	Failure string
 	Success string
+}
+
+type Data struct {
+	Last *Last
+}
+
+type Last struct {
+	Days   int
+	Hours  int
+	Months int
+	Weeks  int
 }
 
 func New() *Configuration {
