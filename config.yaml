@@ -4,6 +4,12 @@ repository: "gh-metrics"
 # The organization that has given repository
 organization: "rmiguelac"
 
+timeseriesdb:
+  host: localhost
+  port: "8086"
+  bucket: ghmetrics
+  organization: myorg
+
 #report:
 #  colors:
 #    # RGBA

@@ -17,6 +17,7 @@ func main() {
 	}
 
 	m := metrics.GetMetrics(myw)
-	metrics.RenderMetricsHTML(m, c)
+	metrics.RenderMetricsHTML(c, m)
+	metrics.ToInfluxDB(c, m)
 
 }

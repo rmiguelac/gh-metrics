@@ -11,6 +11,15 @@ type Configuration struct {
 	Organization string
 	Repository   string
 	Report       *Report
+	TimeseriesDB *TimeseriesDB
+}
+
+type TimeseriesDB struct {
+	Host         string
+	Port         string
+	Auth         string
+	Bucket       string
+	Organization string
 }
 
 type Report struct {
@@ -43,6 +52,7 @@ func New() *Configuration {
 	viper.SetDefault("report.data.last.days", 7)
 	viper.SetDefault("report.colors.success", "139, 193, 71, 0.7")
 	viper.SetDefault("report.colors.failure", "255, 61, 71, 0.7")
+	viper.SetDefault("timeseriesdb.auth", os.Getenv("GH_INFLUX_TOKEN"))
 
 	if err := viper.ReadInConfig(); err != nil {
 		log.Fatalf("Error reading config file, %s", err)
