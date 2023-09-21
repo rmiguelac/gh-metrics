@@ -80,7 +80,7 @@ func PrepareJobsPieChart(m *Metrics, c *configuration.Configuration) *charts.Pie
 }
 
 /* Gather all metrics and return an HTML page */
-func RenderMetricsHTML(m *Metrics, c *configuration.Configuration) {
+func RenderMetricsHTML(c *configuration.Configuration, m *Metrics) {
 
 	page := components.NewPage()
 	wpie := PrepareWorkflowPieChart(m, c)

@@ -6,6 +6,33 @@ import (
 	"github.com/rmiguelac/gh-metrics/pkg/workflows"
 )
 
+type WorkflowMetricPoint struct {
+	Id           string
+	Name         string
+	CreatedAt    string
+	RunStartedAt string
+	Conclusion   string
+}
+
+type JobMetricPoint struct {
+	ParentWorkflowId string
+	Id               string
+	Status           string
+	Conclusion       string
+	StartedAt        string
+	CompletedAt      string
+}
+
+type JobStepsMetricPoint struct {
+	ParentJobId string
+	Name        string
+	Runner      string
+	Status      string
+	Conclusion  string
+	StartedAt   string
+	CompletedAt string
+}
+
 type Metrics struct {
 	TotalJobs             int64
 	TotalJobFailures      int64
